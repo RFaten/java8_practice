@@ -19,9 +19,12 @@ public class Main {
     private static List<BankCard> debitCards;
     public static void main(String[] args) {
         createTestData();
-        TestBankCardCreationLogic();
-        TestServiceSubscribeMethod();
-        TestServiceGetSubscriptionByBankCardNumberMethod();
+        testBankCardCreationLogic();
+        testServiceAddUserMethod();
+        testServiceSubscribeMethod();
+        testServiceGetSubscriptionByBankCardNumberMethod();
+        testGetAverageUsersAge();
+        testIsPayableUser();
     }
 
     private static void createTestData() {
@@ -40,7 +43,7 @@ public class Main {
     }
 
 
-    private static void TestBankCardCreationLogic() {
+    private static void testBankCardCreationLogic() {
         System.out.println("*******Testing Bank Card Creation Logic*******");
         System.out.println("*******Credit Cards are:*******");
         System.out.println(creditCards);
@@ -48,16 +51,31 @@ public class Main {
         System.out.println(debitCards);
     }
 
+    private static void testServiceAddUserMethod() {
+        users.forEach(service::addUser);
+    }
 
-    private static void TestServiceSubscribeMethod() {
+
+    private static void testServiceSubscribeMethod() {
         creditCards.forEach(service::subscribe);
         System.out.println("*******Subscriptions created are:*******");
         service.getAllSubscriptions().forEach(System.out::println);
 
     }
 
-    private static void TestServiceGetSubscriptionByBankCardNumberMethod() {
+    private static void testServiceGetSubscriptionByBankCardNumberMethod() {
         System.out.println("*******Testing Get Subscription By Bank Card Number :*******");
         System.out.println(service.getSubscriptionByBankCardNumber(creditCards.getFirst().getNumber()));
+    }
+
+    private static void testGetAverageUsersAge() {
+        System.out.println("*******Average users age is:*******");
+        System.out.println(service.getAverageUsersAge());
+    }
+
+    private static void testIsPayableUser() {
+        System.out.println("*******Testing Is Payable User :*******");
+        System.out.println(Service.isPayableUser(users.getFirst()));
+        System.out.println(Service.isPayableUser(users.get(2)));
     }
 }

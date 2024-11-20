@@ -8,7 +8,6 @@ import com.epam.jmp.dto.User;
 import com.epam.jmp.service.Service;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +15,7 @@ import java.util.Optional;
 public class ServiceImpl implements Service {
     SubscriptionDAO subscriptionDAO;
     UserDAO userDAO;
+
     public ServiceImpl() {
         subscriptionDAO = new SubscriptionDAO();
         userDAO = new UserDAO();
@@ -39,6 +39,11 @@ public class ServiceImpl implements Service {
                 .stream()
                 .filter(s -> s.getBankcard().equals(cardNumber))
                 .findFirst();
+    }
+
+    @Override
+    public void addUser(User user) {
+        userDAO.addUser(user);
     }
 
     @Override

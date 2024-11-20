@@ -17,6 +17,7 @@ public interface Service {
 
     Optional<Subscription> getSubscriptionByBankCardNumber(String cardNumber);
 
+    void addUser(User user);
     List<User> getAllUsers();
     default double getAverageUsersAge() {
         return getAllUsers()
@@ -25,5 +26,8 @@ public interface Service {
                 .mapToLong(birthday -> ChronoUnit.YEARS.between(birthday, LocalDate.now()))
                 .average()
                 .orElse(0);
+    }
+    static boolean isPayableUser(User user) {
+        return ChronoUnit.YEARS.between(user.getBirthday(), LocalDate.now()) > 18;
     }
 }
