@@ -2,6 +2,7 @@ package com.epam.jmp.run;
 
 import com.epam.jmp.dto.BankCard;
 import com.epam.jmp.dto.BankCardType;
+import com.epam.jmp.dto.Subscription;
 import com.epam.jmp.dto.User;
 import com.epam.jmp.bank.impl.BankImpl;
 import com.epam.jmp.bank.Bank;
@@ -10,6 +11,7 @@ import com.epam.jmp.service.impl.ServiceImpl;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Main {
     private static Bank bank = new BankImpl();
@@ -25,6 +27,7 @@ public class Main {
         testServiceGetSubscriptionByBankCardNumberMethod();
         testGetAverageUsersAge();
         testIsPayableUser();
+        testGetAllSubscriptionsByCondition();
         testExceptionWhenCardNumberDoesntExist();
     }
 
@@ -83,5 +86,11 @@ public class Main {
     private static void testExceptionWhenCardNumberDoesntExist() {
         System.out.println("*******Testing Exception When Card Number Doesn't Exist:*******");
         System.out.println(service.getSubscriptionByBankCardNumber("2455vg5g"));
+    }
+
+    private static void testGetAllSubscriptionsByCondition() {
+        System.out.println("*******Testing Get All Subscriptions By Condition:*******");
+        System.out.println(service.getAllSubscriptionsByCondition(subscription -> subscription.getStartDate().isEqual(LocalDate.now())));
+        System.out.println(service.getAllSubscriptionsByCondition(subscription -> subscription.getStartDate().isAfter(LocalDate.now())));
     }
 }

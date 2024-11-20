@@ -11,6 +11,8 @@ import com.epam.jmp.service.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 public class ServiceImpl implements Service {
@@ -51,5 +53,10 @@ public class ServiceImpl implements Service {
     @Override
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
+    }
+
+    @Override
+    public List<Subscription> getAllSubscriptionsByCondition(Predicate<Subscription> predicate) {
+        return getAllSubscriptions().stream().filter(predicate).collect(Collectors.toUnmodifiableList());
     }
 }
