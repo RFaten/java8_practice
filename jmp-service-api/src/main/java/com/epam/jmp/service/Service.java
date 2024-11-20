@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface Service {
 
     void subscribe(BankCard bankCard);
+    public List<Subscription> getAllSubscriptions();
 
     Optional<Subscription> getSubscriptionByBankCardNumber(String cardNumber);
 

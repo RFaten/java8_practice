@@ -24,7 +24,12 @@ public class ServiceImpl implements Service {
     @Override
     public void subscribe(BankCard bankCard) {
         subscriptionDAO.addSubscription(new Subscription(bankCard.getNumber(), LocalDate.now()));
+    }
 
+
+    @Override
+    public List<Subscription> getAllSubscriptions() {
+        return subscriptionDAO.getAllSubscriptions();
     }
 
     @Override

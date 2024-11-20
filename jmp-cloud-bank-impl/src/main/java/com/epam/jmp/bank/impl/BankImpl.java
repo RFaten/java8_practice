@@ -1,7 +1,7 @@
 package com.epam.jmp.bank.impl;
 
 import com.epam.jmp.dto.*;
-import com.epam.jmp.service.Bank;
+import com.epam.jmp.bank.Bank;
 
 import java.util.HashMap;
 import java.util.Map;
