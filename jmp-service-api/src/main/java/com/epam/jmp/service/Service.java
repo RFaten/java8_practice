@@ -4,8 +4,11 @@ import com.epam.jmp.dto.BankCard;
 import com.epam.jmp.dto.Subscription;
 import com.epam.jmp.dto.User;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public interface Service {
 
@@ -15,4 +18,12 @@ public interface Service {
     Optional<Subscription> getSubscriptionByBankCardNumber(String cardNumber);
 
     List<User> getAllUsers();
+    default double getAverageUsersAge() {
+        return getAllUsers()
+                .stream()
+                .map(User::getBirthday)
+                .mapToLong(birthday -> ChronoUnit.YEARS.between(birthday, LocalDate.now()))
+                .average()
+                .orElse(0);
+    }
 }
