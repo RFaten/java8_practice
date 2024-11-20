@@ -25,6 +25,7 @@ public class Main {
         testServiceGetSubscriptionByBankCardNumberMethod();
         testGetAverageUsersAge();
         testIsPayableUser();
+        testExceptionWhenCardNumberDoesntExist();
     }
 
     private static void createTestData() {
@@ -77,5 +78,10 @@ public class Main {
         System.out.println("*******Testing Is Payable User :*******");
         System.out.println(Service.isPayableUser(users.getFirst()));
         System.out.println(Service.isPayableUser(users.get(2)));
+    }
+
+    private static void testExceptionWhenCardNumberDoesntExist() {
+        System.out.println("*******Testing Exception When Card Number Doesn't Exist:*******");
+        System.out.println(service.getSubscriptionByBankCardNumber("2455vg5g"));
     }
 }

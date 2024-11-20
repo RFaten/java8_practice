@@ -4,6 +4,7 @@ import com.epam.jmp.dao.SubscriptionDAO;
 import com.epam.jmp.dao.UserDAO;
 import com.epam.jmp.dto.BankCard;
 import com.epam.jmp.dto.Subscription;
+import com.epam.jmp.dto.SubscriptionNotFoundException;
 import com.epam.jmp.dto.User;
 import com.epam.jmp.service.Service;
 
@@ -33,12 +34,13 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public Optional<Subscription> getSubscriptionByBankCardNumber(String cardNumber) {
+    public Subscription getSubscriptionByBankCardNumber(String cardNumber) {
         return subscriptionDAO
                 .getAllSubscriptions()
                 .stream()
                 .filter(s -> s.getBankcard().equals(cardNumber))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new SubscriptionNotFoundException("No subscription was found for card number " + cardNumber));
     }
 
     @Override

@@ -8,14 +8,13 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public interface Service {
 
     void subscribe(BankCard bankCard);
     public List<Subscription> getAllSubscriptions();
 
-    Optional<Subscription> getSubscriptionByBankCardNumber(String cardNumber);
+    Subscription getSubscriptionByBankCardNumber(String cardNumber);
 
     void addUser(User user);
     List<User> getAllUsers();
